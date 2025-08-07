@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "fa18a6a5-cbad-407a-9255-30fa86822870",
+		"_postman_id": "e5ecab7e-b130-42cb-ae32-5e7f7d0a0525",
 		"name": "especialista-chat-atendimento_collection",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "25329779"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31291289",
+		"_collection_link": "https://none22-6525.postman.co/workspace/Especialista-Chat~da2edcd0-2fd4-47b4-ad3d-a3f8fcc9bcab/collection/31291289-e5ecab7e-b130-42cb-ae32-5e7f7d0a0525?action=share&source=collection_link&creator=31291289"
 	},
 	"item": [
 		{
@@ -51,7 +52,42 @@
 						}
 					}
 				},
-				"url": "{{baseUrl}}/user"
+				"url": {
+					"raw": "{{baseUrl}}/user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"string\",\n    \"surname\": \"string\",\n    \"mail\": \"string\",\n    \"phone\": \"string\",\n    \"password\": \"string\",\n    \"confirmPassword\": \"banana\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user"
+					]
+				}
 			},
 			"response": []
 		}
