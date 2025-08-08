@@ -386,7 +386,6 @@
 							"\r",
 							"var idObtido = jsonData.id;\r",
 							"var passwordObtido = jsonData.password;\r",
-							"var confirmPasswordObtido = jsonData.confirmPassword;\r",
 							"\r",
 							"pm.test(\"CreateUser - Validar status 201 Created e alguns dados retornados com sucesso\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
