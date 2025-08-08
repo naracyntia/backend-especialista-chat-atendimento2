@@ -19,4 +19,8 @@ export class UserService {
         this.users.push(user)
         return user;    
     }
+
+    async getAllUser () : Promise<User[]> {
+        return this.users;
+    }
 }
