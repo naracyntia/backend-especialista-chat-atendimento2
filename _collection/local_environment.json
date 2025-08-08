@@ -1,5 +1,5 @@
 {
-	"id": "6dd18d3d-767e-4d3d-b31d-f08c33ba427b",
+	"id": "5826cee4-e4b4-4048-b679-ed8693bd71ab",
 	"name": "local_environment",
 	"values": [
 		{
@@ -7,9 +7,81 @@
 			"value": "http://localhost:3000",
 			"type": "default",
 			"enabled": true
+		},
+		{
+			"key": "name",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "surname",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "mail",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "phone",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "password",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "confirmPassword",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "idUserObtido",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nameUserObtido",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "surnameUserObtido",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "mailUserObtido",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "phoneUserObtido",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "passwordUserObtido",
+			"value": "",
+			"type": "any",
+			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2025-08-07T23:11:58.392Z",
-	"_postman_exported_using": "Postman/11.57.5"
+	"_postman_exported_at": "2025-08-08T02:34:35.711Z",
+	"_postman_exported_using": "Postman/11.56.3"
 }
