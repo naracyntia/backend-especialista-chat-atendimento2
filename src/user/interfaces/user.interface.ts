@@ -5,5 +5,4 @@ export interface User{
     mail: string;
     phone: string;
     password: string;
-    confirmPassword: string;
 }
