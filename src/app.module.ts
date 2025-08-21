@@ -17,6 +17,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: process.env.DATABASE_PASSWORD,
       autoLoadEntities: true,
       synchronize: true,
+      entities: [`${__dirname}/**/*.entity`]
     }),
     UserModule],
   
