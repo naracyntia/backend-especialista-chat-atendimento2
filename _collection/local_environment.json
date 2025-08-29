@@ -1,5 +1,5 @@
 {
-	"id": "5826cee4-e4b4-4048-b679-ed8693bd71ab",
+	"id": "488893dd-4b1b-4254-afa6-15470df80aa1",
 	"name": "local_environment",
 	"values": [
 		{
@@ -79,9 +79,51 @@
 			"value": "",
 			"type": "any",
 			"enabled": true
+		},
+		{
+			"key": "NameUpdate",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "SurnameUpdate",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "ProviderMail",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "MailUpdate",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "TelephoneUpdate",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "PhoneUpdate",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "passwordUpdate",
+			"value": "",
+			"type": "any",
+			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2025-08-08T02:34:35.711Z",
-	"_postman_exported_using": "Postman/11.56.3"
+	"_postman_exported_at": "2025-08-28T23:55:50.519Z",
+	"_postman_exported_using": "Postman/11.60.3"
 }
