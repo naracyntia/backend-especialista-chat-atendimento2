@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f1bb01ce-6038-413a-ad58-3ff0070925ea",
+		"_postman_id": "8dfa4685-8f52-497b-a0ad-4ef17c45bde4",
 		"name": "especialista-chat-atendimento_collection",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "25329779"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31291289"
 	},
 	"item": [
 		{
@@ -435,7 +435,15 @@
 						}
 					}
 				},
-				"url": "{{baseUrl}}/user"
+				"url": {
+					"raw": "{{baseUrl}}/user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user"
+					]
+				}
 			},
 			"response": []
 		},
@@ -501,7 +509,189 @@
 						}
 					}
 				},
-				"url": "{{baseUrl}}/user"
+				"url": {
+					"raw": "{{baseUrl}}/user",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const fakerBr = pm.require('npm:faker-br@0.5.0');",
+							"",
+							"function userName() {",
+							"    let firstName = pm.variables.replaceIn('{{$randomFirstName}}').replace(/[^a-zA-Z ]|-/g, '');",
+							"    pm.environment.set(\"NameUpdate\", firstName);",
+							"}",
+							"userName();",
+							"",
+							"function userSurname() {",
+							"    let lastName = pm.variables.replaceIn('{{$randomLastName}}').replace(/[^a-zA-Z ]|-/g, '');",
+							"    pm.environment.set(\"SurnameUpdate\", lastName);",
+							"}",
+							"userSurname();",
+							"",
+							"function providerMail() {",
+							"    let providerMail = [\"@yahoo.com.br\", \"@gmail.com\", \"@outlook.com\", \"@hotmail.com\", \"@uol.com.br\"]",
+							"",
+							"    let randomItem = providerMail[Math.floor(Math.random() * providerMail.length)];",
+							"",
+							"    return randomItem",
+							"}",
+							"pm.environment.set(\"ProviderMail\", providerMail());",
+							"",
+							"function userMail() {",
+							"    const firstName = pm.environment.get(\"NameUpdate\").toLowerCase();",
+							"    const lastName = pm.environment.get(\"SurnameUpdate\").toLowerCase();",
+							"    const domain = pm.environment.get(\"ProviderMail\");",
+							"   ",
+							"    const email = `${firstName}.${lastName}@${domain}`;",
+							"    pm.environment.set(\"MailUpdate\", email);",
+							"}",
+							"userMail();",
+							"",
+							"function telephone() {",
+							"    let DDDs = [11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 24, 27, 28, 31, 32, 33, 34, 35, 37, 38, 41, 42, 43, 44, 45, 46, 47, 48, 49, 51, 53, 54, 55, 61, 62, 64, 65, 66, 67, 68, 69, 71, 73, 74, 75, 77, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 91, 92, 93, 94, 95, 96, 97, 98, 99];",
+							"",
+							"    let randomDDD = DDDs[Math.floor(Math.random() * DDDs.length)];",
+							"",
+							"    let numberPhone = '';",
+							"    for (let i = 0; i < 8; i++) {",
+							"        numberPhone += Math.floor(Math.random() * 10);",
+							"    }",
+							"",
+							"    return  randomDDD + \"9\" + numberPhone;",
+							"}",
+							"pm.environment.set(\"PhoneUpdate\", telephone());",
+							"",
+							"// validar a senha de acordo com as regras",
+							"function validarSenha(senha) {",
+							"    const regraTamanho = senha.length >= 8 && senha.length <= 16;",
+							"    const regraMaiuscula = /[A-Z]/.test(senha);",
+							"    const regraMinuscula = /[a-z]/.test(senha);",
+							"    const regraNumero = /\\d/.test(senha);",
+							"    const regraEspecial = /[!@#$%^&*()_+\\[\\]{}<>?,.]/.test(senha);",
+							"",
+							"    return regraTamanho && regraMaiuscula && regraMinuscula && regraNumero && regraEspecial;",
+							"}",
+							"",
+							"function gerarSenha() {",
+							"    const maiusculo = fakerBr.lorem.word(1).toUpperCase(); // 1 letra maiúscula",
+							"    const minusculo = fakerBr.lorem.word(1).toLowerCase(); // 1 letra minúscula",
+							"    const numero = fakerBr.random.number({ min: 0, max: 9 }).toString(); // 1 número",
+							"    const caracteresEspeciais = \"!@#$%^&*()_+[]{}<>?,.\";",
+							"    const especial = caracteresEspeciais.charAt(fakerBr.random.number({ min: 0, max: caracteresEspeciais.length - 1 }));",
+							"",
+							"    // tamanho final entre 8 e 16",
+							"    const tamanhoFinal = fakerBr.random.number({ min: 8, max: 16 });",
+							"",
+							"    // caracteres restantes para preencher",
+							"    const todosCaracteres = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\" + caracteresEspeciais;",
+							"    var restante = \"\";",
+							"    for (var i = 0; i < tamanhoFinal - 4; i++) {",
+							"        restante += todosCaracteres.charAt(fakerBr.random.number({ min: 0, max: todosCaracteres.length - 1 }));",
+							"    }",
+							"",
+							"    // senha com todos os requisitos",
+							"    var senha = maiusculo + minusculo + numero + especial + restante;",
+							"",
+							"    // embaralhar para evitar padrão previsível",
+							"    senha = senha.split('').sort(() => Math.random() - 0.5).join('');",
+							"",
+							"    return senha;",
+							"}",
+							"",
+							"// gerar senha até ser válida",
+							"var senhaGerada;",
+							"do {",
+							"    senhaGerada = gerarSenha();",
+							"} while (!validarSenha(senhaGerada));",
+							"pm.environment.set(\"passwordUpdate\", senhaGerada);"
+						],
+						"type": "text/javascript",
+						"packages": {
+							"npm:faker-br@0.5.0": {
+								"id": "npm:faker-br@0.5.0"
+							}
+						}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function() {",
+							"    pm.response.to.have.status(200)",
+							"});",
+							"",
+							"pm.test(\"Validate update message\", function() {",
+							"    pm.expect(pm.globals.get(\"MsgUpdate\")).to.eql(pm.response.json().message);",
+							"})",
+							"",
+							"pm.test(\"Check if ID is not empty\", function() {",
+							"    pm.expect(pm.response.json().user.id).to.exist;",
+							"})",
+							"",
+							"pm.test(\"Check if name has been updated\", function() {",
+							"    pm.expect(pm.environment.get(\"NameUpdate\")).to.eql(pm.response.json().user.name);",
+							"});",
+							"",
+							"pm.test(\"Check if surname has been updated\", function() {",
+							"    pm.expect(pm.environment.get(\"SurnameUpdate\")).to.eql(pm.response.json().user.surname);",
+							"});",
+							"",
+							"pm.test(\"Check if mail has been updated\", function() {",
+							"    pm.expect(pm.environment.get(\"MailUpdate\")).to.eql(pm.response.json().user.mail);",
+							"});",
+							"",
+							"pm.test(\"Check if phone has been updated\", function() {",
+							"    pm.expect(pm.environment.get(\"PhoneUpdate\")).to.eql(pm.response.json().user.phone);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{NameUpdate}}\",\n    \"surname\": \"{{SurnameUpdate}}\",\n    \"mail\": \"{{MailUpdate}}\",\n    \"phone\": \"{{PhoneUpdate}}\",\n    \"password\": \"{{passwordUpdate}}\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/user/{{idUserObtido}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"{{idUserObtido}}"
+					]
+				}
 			},
 			"response": []
 		}
