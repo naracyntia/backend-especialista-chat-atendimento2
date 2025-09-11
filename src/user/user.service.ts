@@ -27,7 +27,7 @@ export class UserService {
         return this.userRepository.find();
     }
 
-    async updateUser(id: string, updateUserDto: CreateUserDto): Promise<UserEntity> {
+    async updateUser(id: string, updateUserDto: CreateUserDto): Promise<{ message: string, data: UserEntity }> {
         const saltOrRounds = 10;
         const passwordHash = await hash(updateUserDto.password, saltOrRounds);
         const userUpdate = await this.userRepository.findOne({
@@ -47,7 +47,12 @@ export class UserService {
             password: passwordHash,
         };
 
-        return this.userRepository.save(updateUser);
+        const savedUser = await this.userRepository.save(updateUser);
+ 
+        return {
+            message: "Dados atualizados com sucesso.",
+            data: savedUser
+        };
     }
 
     async getUserId(id: string): Promise<UserEntity> {
@@ -77,6 +82,6 @@ export class UserService {
 
         await this.userRepository.delete({ id: Number(id) });
 
-        return { message: 'Usuário deletado com sucesso' };
+        return { message: 'Usuário deletado com sucesso.' };
     }
 }
