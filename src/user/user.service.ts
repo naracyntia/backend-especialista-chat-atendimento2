@@ -50,7 +50,7 @@ export class UserService {
         const savedUser = await this.userRepository.save(updateUser);
  
         return {
-            message: "Dados atualizados com sucesso.",
+            message: `Dados atualizados com sucesso.`,
             data: savedUser
         };
     }
@@ -82,6 +82,7 @@ export class UserService {
 
         await this.userRepository.delete({ id: Number(id) });
 
-        return { message: 'Usuário deletado com sucesso.' };
+        return { message: `Usuário deletado com sucesso.`};
     }
+
 }
