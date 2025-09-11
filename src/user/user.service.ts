@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { UserEntity } from './interfaces/user.entity';
 import { hash } from 'bcrypt';
@@ -7,7 +7,6 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-
     constructor(
         @InjectRepository(UserEntity)
         private readonly userRepository: Repository<UserEntity>,
@@ -21,8 +20,7 @@ export class UserService {
             ...createUserDto,
             password: passwordHash,
             confirmPassword: undefined,
-
-        })
+        });
     }
 
     async getAllUser(): Promise<UserEntity[]> {
@@ -33,13 +31,12 @@ export class UserService {
         const saltOrRounds = 10;
         const passwordHash = await hash(updateUserDto.password, saltOrRounds);
         const userUpdate = await this.userRepository.findOne({
-            where: { id: Number(id) }
+            where: { id: Number(id) },
         });
 
         if (!userUpdate) {
-            throw new HttpException({
-                message: `Usuário com o id ${id} não encontrado.`
-            },
+            throw new HttpException(
+                { message: `Usuário com o id ${id} não encontrado.` },
                 HttpStatus.NOT_FOUND,
             );
         }
@@ -48,8 +45,38 @@ export class UserService {
             ...userUpdate,
             ...updateUserDto,
             password: passwordHash,
-        }
-        
+        };
+
         return this.userRepository.save(updateUser);
+    }
+
+    async getUserId(id: string): Promise<UserEntity> {
+        const getUserId = await this.userRepository.findOne({
+            where: { id: Number(id) },
+        });
+        if (!getUserId) {
+            throw new HttpException(
+                { message: `Usuário com o id ${id} não encontrado.` },
+                HttpStatus.NOT_FOUND,
+            );
+        }
+        return getUserId;
+    }
+
+    async deleteUser(id: string): Promise<{ message: string }> {
+        const userDelete = await this.userRepository.findOne({
+            where: { id: Number(id) },
+        });
+
+        if (!userDelete) {
+            throw new HttpException(
+                { message: `Usuário com o id ${id} não encontrado.` },
+                HttpStatus.NOT_FOUND,
+            );
+        }
+
+        await this.userRepository.delete({ id: Number(id) });
+
+        return { message: 'Usuário deletado com sucesso' };
     }
 }
