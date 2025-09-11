@@ -13,10 +13,10 @@ export class UserController {
     }
 
     @Get(`:id`)
-    async getUser(
+    async getUserId(
         @Param('id',) id: string,
     ): Promise<UserEntity> {
-        return this.userService.getUser(id);
+        return this.userService.getUserId(id);
     }
 
     @Post()
@@ -26,13 +26,14 @@ export class UserController {
         return this.userService.createUser(createUser);
     }
 
-    @Put(`:id`)
+    @Put(':id')
     async updateUser(
-        @Param(`id`) id: string,
+        @Param('id') id: string,
         @Body() updateUser: CreateUserDto
-    ): Promise<UserEntity> {
-        return this.userService.updateUser(id, updateUser)
+    ): Promise<{ message: string, data: UserEntity }> {
+        return this.userService.updateUser(id, updateUser);
     }
+
 
     @Delete(`:id`)
     async deleteUser(

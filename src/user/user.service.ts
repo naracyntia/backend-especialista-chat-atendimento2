@@ -29,9 +29,10 @@ export class UserService {
         return this.userRepository.find();
     }
 
-    async getUser(id: string): Promise<UserEntity> {
-        const userById = await this.userRepository.findOne({ 
-            where: { id: Number(id) } });
+    async getUserId(id: string): Promise<UserEntity> {
+        const userById = await this.userRepository.findOne({
+            where: { id: Number(id) }
+        });
 
         if (!userById) {
             throw new HttpException({
@@ -44,7 +45,7 @@ export class UserService {
         return userById;
     }
 
-    async updateUser(id: string, updateUserDto: CreateUserDto): Promise<UserEntity> {
+    async updateUser(id: string, updateUserDto: CreateUserDto): Promise<{ message: string, data: UserEntity }> {
         const saltOrRounds = 10;
         const passwordHash = await hash(updateUserDto.password, saltOrRounds);
         const userUpdate = await this.userRepository.findOne({
@@ -65,7 +66,12 @@ export class UserService {
             password: passwordHash,
         }
 
-        return this.userRepository.save(updateUser);
+        const savedUser = await this.userRepository.save(updateUser);
+
+        return {
+            message:`Dados atualizados com sucesso.`,
+            data: savedUser
+        };
     }
 
     async deleteUser(id: string): Promise<{ message: string }> {
@@ -81,7 +87,7 @@ export class UserService {
 
         await this.userRepository.remove(deleteUser);
 
-        return { message: `Usuário com id ${id} foi removido com sucesso.` };
+        return { message: `Usuário deletado com sucesso.` };
     }
 
 }
