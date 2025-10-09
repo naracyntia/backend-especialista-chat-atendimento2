@@ -10,120 +10,90 @@
 		},
 		{
 			"key": "name",
-			"value": "",
+			"value": "Natália",
 			"type": "any",
 			"enabled": true
 		},
 		{
 			"key": "surname",
-			"value": "",
+			"value": "Moreira",
 			"type": "any",
 			"enabled": true
 		},
 		{
 			"key": "mail",
-			"value": "",
+			"value": "natalia.moreira.740517@hotmail.com.br",
 			"type": "any",
 			"enabled": true
 		},
 		{
 			"key": "phone",
-			"value": "",
+			"value": "14936500382",
 			"type": "any",
 			"enabled": true
 		},
 		{
 			"key": "password",
-			"value": "",
+			"value": "E6TLnu!>$s2Dt",
 			"type": "any",
 			"enabled": true
 		},
 		{
 			"key": "confirmPassword",
-			"value": "",
-			"type": "any",
-			"enabled": true
-		},
-		{
-			"key": "idUserObtido",
-			"value": "",
-			"type": "any",
-			"enabled": true
-		},
-		{
-			"key": "nameUserObtido",
-			"value": "",
-			"type": "any",
-			"enabled": true
-		},
-		{
-			"key": "surnameUserObtido",
-			"value": "",
-			"type": "any",
-			"enabled": true
-		},
-		{
-			"key": "mailUserObtido",
-			"value": "",
-			"type": "any",
-			"enabled": true
-		},
-		{
-			"key": "phoneUserObtido",
-			"value": "",
-			"type": "any",
-			"enabled": true
-		},
-		{
-			"key": "passwordUserObtido",
-			"value": "",
+			"value": "E6TLnu!>$s2Dt",
 			"type": "any",
 			"enabled": true
 		},
 		{
 			"key": "NameUpdate",
-			"value": "",
+			"value": "Merlin",
 			"type": "any",
 			"enabled": true
 		},
 		{
 			"key": "SurnameUpdate",
-			"value": "",
+			"value": "Nienow",
 			"type": "any",
 			"enabled": true
 		},
 		{
 			"key": "ProviderMail",
-			"value": "",
+			"value": "@outlook.com",
 			"type": "any",
 			"enabled": true
 		},
 		{
 			"key": "MailUpdate",
-			"value": "",
+			"value": "merlin.nienow@@outlook.com",
 			"type": "any",
 			"enabled": true
 		},
 		{
 			"key": "TelephoneUpdate",
-			"value": "",
+			"value": "89946429142",
 			"type": "any",
 			"enabled": true
 		},
 		{
 			"key": "PhoneUpdate",
-			"value": "",
+			"value": "47946090478",
 			"type": "any",
 			"enabled": true
 		},
 		{
 			"key": "passwordUpdate",
-			"value": "",
+			"value": "IE1gPSAhar@umTI",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "UserId",
+			"value": 35,
 			"type": "any",
 			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2025-08-28T23:55:50.519Z",
-	"_postman_exported_using": "Postman/11.60.3"
+	"_postman_exported_at": "2025-10-09T22:35:57.242Z",
+	"_postman_exported_using": "Postman/11.66.2"
 }
