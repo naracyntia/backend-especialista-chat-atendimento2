@@ -375,35 +375,42 @@
 							"npm:faker-br@0.5.0": {
 								"id": "npm:faker-br@0.5.0"
 							}
-						}
+						},
+						"requests": {}
 					}
 				},
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"\r",
-							"var idObtido = jsonData.id;\r",
-							"var passwordObtido = jsonData.password;\r",
-							"\r",
-							"pm.test(\"CreateUser - Validar status 201 Created e alguns dados retornados com sucesso\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"    pm.response.to.have.status(\"Created\");\r",
-							"\r",
-							"    pm.expect(idObtido).to.exist;\r",
-							"    pm.expect(passwordObtido).to.exist;\r",
-							"});\r",
-							"\r",
-							"pm.environment.set(\"idUserObtido\", idObtido);\r",
-							"pm.environment.set(\"nameUserObtido\", jsonData.name);\r",
-							"pm.environment.set(\"surnameUserObtido\", jsonData.surname);\r",
-							"pm.environment.set(\"mailUserObtido\", jsonData.mail);\r",
-							"pm.environment.set(\"phoneUserObtido\", jsonData.phone);\r",
-							"pm.environment.set(\"passwordUserObtido\", passwordObtido);"
+							"pm.test(\"Status code is 201\", function() {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Check if ID is not empty\", function() {",
+							"    pm.expect(pm.response.json().id).to.exist;",
+							"    pm.environment.set(\"UserId\", pm.response.json().id);",
+							"});",
+							"",
+							"pm.test(\"Check if Name is true\", function() {",
+							"    pm.expect(pm.response.json().name).to.eql(pm.environment.get(\"name\"));",
+							"});",
+							"",
+							"pm.test(\"Check if Surname is true\", function() {",
+							"    pm.expect(pm.response.json().surname).to.eql(pm.environment.get(\"surname\"));",
+							"});",
+							"",
+							"pm.test(\"Check if Mail is true\", function() {",
+							"    pm.expect(pm.response.json().mail).to.eql(pm.environment.get(\"mail\"));",
+							"});",
+							"",
+							"pm.test(\"Check if Phone is true\", function() {",
+							"    pm.expect(pm.response.json().phone).to.eql(pm.environment.get(\"phone\"));",
+							"});"
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -454,22 +461,22 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var idEsperado = pm.environment.get(\"idUserObtido\");\r",
-							"var nameEsperado = pm.environment.get(\"nameUserObtido\");\r",
-							"var surnameEsperado = pm.environment.get(\"surnameUserObtido\");\r",
-							"var mailEsperado = pm.environment.get(\"mailUserObtido\");\r",
-							"var phoneEsperado = pm.environment.get(\"phoneUserObtido\");\r",
-							"var passwordEsperado = pm.environment.get(\"passwordUserObtido\");\r",
-							"\r",
-							"pm.test(\"GetAllUser - Validar status 200 OK e alguns dados retornados com sucesso\", function () {\r",
+							"pm.test(\"Status is 200\", function() {\r",
 							"    pm.response.to.have.status(200);\r",
-							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
 							"\r",
-							"    pm.expect(pm.response.text()).to.include(idEsperado && nameEsperado && surnameEsperado && mailEsperado && phoneEsperado && passwordEsperado);\r",
+							"pm.test(\"Response contains an array\", function () {\r",
+							"    pm.expect(Array.isArray(pm.response.json())).to.be.true;\r",
+							"    pm.expect(pm.response.json().length).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has the id parameter\", function () {\r",
+							"    pm.expect(pm.response.json()[0]).to.have.property('id');\r",
 							"});"
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
 					}
 				},
 				{
@@ -479,7 +486,8 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -516,6 +524,94 @@
 					],
 					"path": [
 						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check if ID is not empty\", function() {",
+							"    pm.expect(pm.response.json().id).to.exist;",
+							"    pm.environment.set(\"UserId\", pm.response.json().id);",
+							"});",
+							"",
+							"pm.test(\"Check if Name is true\", function() {",
+							"    pm.expect(pm.response.json().name).to.eql(pm.environment.get(\"name\"));",
+							"});",
+							"",
+							"pm.test(\"Check if Surname is true\", function() {",
+							"    pm.expect(pm.response.json().surname).to.eql(pm.environment.get(\"surname\"));",
+							"});",
+							"",
+							"pm.test(\"Check if Mail is true\", function() {",
+							"    pm.expect(pm.response.json().mail).to.eql(pm.environment.get(\"mail\"));",
+							"});",
+							"",
+							"pm.test(\"Check if Phone is true\", function() {",
+							"    pm.expect(pm.response.json().phone).to.eql(pm.environment.get(\"phone\"));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/user/{{UserId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"{{UserId}}"
 					]
 				}
 			},
@@ -624,7 +720,8 @@
 							"npm:faker-br@0.5.0": {
 								"id": "npm:faker-br@0.5.0"
 							}
-						}
+						},
+						"requests": {}
 					}
 				},
 				{
@@ -640,27 +737,28 @@
 							"})",
 							"",
 							"pm.test(\"Check if ID is not empty\", function() {",
-							"    pm.expect(pm.response.json().user.id).to.exist;",
+							"    pm.expect(pm.response.json().data.id).to.exist;",
 							"})",
 							"",
 							"pm.test(\"Check if name has been updated\", function() {",
-							"    pm.expect(pm.environment.get(\"NameUpdate\")).to.eql(pm.response.json().user.name);",
+							"    pm.expect(pm.environment.get(\"NameUpdate\")).to.eql(pm.response.json().data.name);",
 							"});",
 							"",
 							"pm.test(\"Check if surname has been updated\", function() {",
-							"    pm.expect(pm.environment.get(\"SurnameUpdate\")).to.eql(pm.response.json().user.surname);",
+							"    pm.expect(pm.environment.get(\"SurnameUpdate\")).to.eql(pm.response.json().data.surname);",
 							"});",
 							"",
 							"pm.test(\"Check if mail has been updated\", function() {",
-							"    pm.expect(pm.environment.get(\"MailUpdate\")).to.eql(pm.response.json().user.mail);",
+							"    pm.expect(pm.environment.get(\"MailUpdate\")).to.eql(pm.response.json().data.mail);",
 							"});",
 							"",
 							"pm.test(\"Check if phone has been updated\", function() {",
-							"    pm.expect(pm.environment.get(\"PhoneUpdate\")).to.eql(pm.response.json().user.phone);",
+							"    pm.expect(pm.environment.get(\"PhoneUpdate\")).to.eql(pm.response.json().data.phone);",
 							"});"
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -683,13 +781,81 @@
 					"raw": "{\n    \"name\": \"{{NameUpdate}}\",\n    \"surname\": \"{{SurnameUpdate}}\",\n    \"mail\": \"{{MailUpdate}}\",\n    \"phone\": \"{{PhoneUpdate}}\",\n    \"password\": \"{{passwordUpdate}}\"\n}"
 				},
 				"url": {
-					"raw": "{{baseUrl}}/user/{{idUserObtido}}",
+					"raw": "{{baseUrl}}/user/{{UserId}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"user",
-						"{{idUserObtido}}"
+						"{{UserId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUserById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate msg delete\", function() {\r",
+							"    pm.expect(pm.response.json().msg).to.eql(pm.globals.get(\"idUserObtido\"))\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/user/{{UserId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						"{{UserId}}"
 					]
 				}
 			},
