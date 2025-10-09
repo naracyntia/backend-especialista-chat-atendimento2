@@ -40,10 +40,10 @@ export class CreateTableUser1755820322862 implements MigrationInterface {
 export class AddUniqueEmailUser1755820322862 implements MigrationInterface {
     name = 'AddUniqueEmailUser1755820322862'
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE UNIQUE INDEX IF NOT EXISTS "IDX_user_email" ON public."user"(email);`);
+        await queryRunner.query(`CREATE UNIQUE INDEX IF NOT EXISTS "IDX_user_mail" ON public."user"(mail);`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`DROP INDEX IF EXISTS "IDX_user_email"`);
+        await queryRunner.query(`DROP INDEX IF EXISTS "IDX_user_mail"`);
     }
 }
