@@ -7,6 +7,7 @@ import { UserEntity } from 'src/user/interfaces/user.entity';
 import { UserService } from 'src/user/user.service';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
     imports:[
@@ -17,7 +18,7 @@ import { AuthController } from './auth.controller';
             inject:[ConfigService],
             useFactory: (cfg: ConfigService) => ({
                 secret: cfg.get<string>('JWT_SECRET'),
-                signOptions: [ expiresIn: cfg.get<string>('JWT_EXPIRES_IN') || '7d' ],
+                signOptions: { expiresIn: cfg.get<string>('JWT_EXPIRES_IN') || '7d' }
             }),
         }),
         TypeOrmModule.forFeature([UserEntity]),
