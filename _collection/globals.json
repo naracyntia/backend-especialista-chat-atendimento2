@@ -12,10 +12,16 @@
 			"value": "Dados atualizados com sucesso.",
 			"type": "default",
 			"enabled": true
+		},
+		{
+			"key": "MsgAuth",
+			"value": "Autenticação realizada com sucesso.",
+			"type": "default",
+			"enabled": true
 		}
 	],
 	"name": "Globals",
 	"_postman_variable_scope": "globals",
-	"_postman_exported_at": "2025-10-09T22:36:06.317Z",
-	"_postman_exported_using": "Postman/11.66.2"
+	"_postman_exported_at": "2025-10-23T22:18:05.085Z",
+	"_postman_exported_using": "Postman/11.68.4"
 }

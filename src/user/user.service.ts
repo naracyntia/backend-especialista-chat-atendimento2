@@ -29,7 +29,7 @@ export class UserService {
         return this.userRepository.find();
     }
 
-    async getUserId(id: string): Promise<UserEntity> {
+    async getUserId(id: number): Promise<UserEntity> {
         const userById = await this.userRepository.findOne({
             where: { id: Number(id) }
         });
@@ -45,7 +45,7 @@ export class UserService {
         return userById;
     }
 
-    async updateUser(id: string, updateUserDto: CreateUserDto): Promise<{ message: string, data: UserEntity }> {
+    async updateUser(id: number, updateUserDto: CreateUserDto): Promise<{ message: string, data: UserEntity }> {
         const saltOrRounds = 10;
         const passwordHash = await hash(updateUserDto.password, saltOrRounds);
         const userUpdate = await this.userRepository.findOne({
@@ -74,7 +74,7 @@ export class UserService {
         };
     }
 
-    async deleteUser(id: string): Promise<{ message: string }> {
+    async deleteUser(id: number): Promise<{ message: string }> {
         const deleteUser = await this.userRepository.findOne({ where: { id: Number(id) } });
 
         if (!deleteUser) {
