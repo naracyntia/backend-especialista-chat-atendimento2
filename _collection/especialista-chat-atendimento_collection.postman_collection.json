@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "CreateUser",
+			"name": "user_create",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -455,7 +455,86 @@
 			"response": []
 		},
 		{
-			"name": "GetAllUser",
+			"name": "user_auth_login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate authenticate msg\", function() {",
+							"    pm.expect(pm.response.json().message).to.eql(pm.globals.get(\"MsgAuth\"))",
+							"})",
+							"",
+							"pm.test(\"Token is true\", function() {",
+							"    pm.expect(pm.response.json().token).to.not.be.empty;",
+							"})",
+							"",
+							"pm.test(\"User Id is true\", function() {",
+							"    pm.expect(pm.response.json().user.id).to.eql(pm.environment.get(\"UserId\"))",
+							"})",
+							"",
+							"pm.test(\"Name Id is true\", function() {",
+							"    pm.expect(pm.response.json().user.name).to.eql(pm.environment.get(\"name\"))",
+							"})",
+							"",
+							"pm.test(\"Surname Id is true\", function() {",
+							"    pm.expect(pm.response.json().user.surname).to.eql(pm.environment.get(\"surname\"))",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mail\": \"{{mail}}\",\n    \"password\": \"{{password}}\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_get_list",
 			"event": [
 				{
 					"listen": "test",
@@ -530,7 +609,7 @@
 			"response": []
 		},
 		{
-			"name": "GetUserById",
+			"name": "user_get_id",
 			"event": [
 				{
 					"listen": "test",
@@ -618,7 +697,7 @@
 			"response": []
 		},
 		{
-			"name": "UpdateUser",
+			"name": "user_update",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -794,7 +873,7 @@
 			"response": []
 		},
 		{
-			"name": "DeleteUserById",
+			"name": "user_delete_id",
 			"event": [
 				{
 					"listen": "test",
