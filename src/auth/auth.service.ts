@@ -36,7 +36,7 @@ export class AuthService {
         const payload = { sub: user.id, email: user.mail };
         const token = await this.jwtService.signAsync(payload);
 
-        return { message: 'Login realizado com sucesso.',
+        return { message: 'Autenticação realizada com sucesso.',
                  user: {
                     id: user.id,
                     name: user.name,
