@@ -14,7 +14,7 @@ export class UserController {
 
     @Get(`:id`)
     async getUserId(
-        @Param('id',) id: string,
+        @Param('id',) id: number,
     ): Promise<UserEntity> {
         return this.userService.getUserId(id);
     }
@@ -28,7 +28,7 @@ export class UserController {
 
     @Put(':id')
     async updateUser(
-        @Param('id') id: string,
+        @Param('id') id: number,
         @Body() updateUser: CreateUserDto
     ): Promise<{ message: string, data: UserEntity }> {
         return this.userService.updateUser(id, updateUser);
@@ -37,7 +37,7 @@ export class UserController {
 
     @Delete(`:id`)
     async deleteUser(
-        @Param(`id`) id: string,
+        @Param(`id`) id: number,
     ): Promise<{ message: string }> {
         return this.userService.deleteUser(id);
     }
