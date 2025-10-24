@@ -1,7 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { UserPreferencesEntity } from "./user-preferences.entity";
 
 @Entity({ name:'user'})
 export class UserEntity {
+    @OneToOne(()=> UserPreferencesEntity, pref => pref.user)
+    preferences: UserPreferencesEntity;
+    
     @PrimaryGeneratedColumn('rowid')
     id: number;
 

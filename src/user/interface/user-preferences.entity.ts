@@ -1,0 +1,37 @@
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { UserEntity } from "./user.entity";
+
+@Entity('user_preferences')
+export class UserPreferencesEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @OneToOne(() => UserEntity, (user) => user.preferences, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
+
+  @Column({ default: false })
+  prefers_voice: boolean;
+
+  @Column({ nullable: true })
+  preferred_name: string;
+
+  @Column({ nullable: true })
+  pronouns: string;
+
+  @Column({ default: 'pt-BR' })
+  speech_language: string;
+
+  @Column({ type: 'float', default: 1.0 })
+  speech_rate: number;
+
+  @Column({ default: 'didatico' })
+  assistant_persona: string;
+
+  @Column({ default: false })
+  consent_recorded: boolean;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+}
+

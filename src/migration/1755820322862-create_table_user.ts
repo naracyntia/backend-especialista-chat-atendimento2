@@ -4,7 +4,7 @@ export class CreateTableUser1755820322862 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`
-            CREATE TABLE public."user"(
+            CREATE TABLE IF NOT EXISTS public."user"(
                 id INTEGER NOT NULL,
                 name CHARACTER VARYING NOT NULL,
                 surname CHARACTER VARYING NOT NULL,
@@ -16,7 +16,7 @@ export class CreateTableUser1755820322862 implements MigrationInterface {
                 PRIMARY KEY (id)
             );
 
-            CREATE SEQUENCE public.user_id_seq
+            CREATE SEQUENCE IF NOT EXISTS public.user_id_seq
                 As INTEGER
                 START WITH 1
                 INCREMENT BY 1
@@ -32,15 +32,25 @@ export class CreateTableUser1755820322862 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`DROP TABLE public."user";`);
-        await queryRunner.query(`DROP SEQUENCE public.user_id_seq`);
+        await queryRunner.query(`DROP TABLE IF EXISTS public."user";`);
+        await queryRunner.query(`DROP SEQUENCE IF EXISTS public.user_id_seq`);
     }
 }
 
 export class AddUniqueEmailUser1755820322862 implements MigrationInterface {
     name = 'AddUniqueEmailUser1755820322862'
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE UNIQUE INDEX IF NOT EXISTS "IDX_user_mail" ON public."user"(mail);`);
+        await queryRunner.query(`DO $$
+        BEGIN
+          IF EXISTS (
+            SELECT 1 FROM information_schema.columns 
+            WHERE table_schema = 'public' 
+              AND table_name = 'user' 
+              AND column_name = 'mail'
+          ) THEN
+            CREATE UNIQUE INDEX IF NOT EXISTS "IDX_user_mail" ON public."user"(mail);
+          END IF;
+        END $$;`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
