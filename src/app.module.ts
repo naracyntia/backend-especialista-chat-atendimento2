@@ -3,6 +3,8 @@ import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { UserEntity } from "./user/interface/user.entity";
+
 
 @Module({
   imports: [
@@ -19,9 +21,11 @@ import { AuthModule } from './auth/auth.module';
       autoLoadEntities: true,
       entities: [`${__dirname}/**/*.entity`],
       migrations: [`${__dirname}/migration/.ts,*.js`],
+      synchronize: false,
       migrationsRun: true,
     }),
     UserModule,
+    UserEntity,
     AuthModule],
   
   controllers: [],
