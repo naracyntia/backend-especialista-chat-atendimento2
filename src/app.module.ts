@@ -20,7 +20,7 @@ import { UserEntity } from "./user/interface/user.entity";
       password: process.env.DATABASE_PASSWORD,
       autoLoadEntities: true,
       entities: [`${__dirname}/**/*.entity`],
-      migrations: [`${__dirname}/migration/.ts,*.js`],
+      migrations: [`${__dirname}/migration/*{.ts,.js}`],
       synchronize: false,
       migrationsRun: true,
     }),
